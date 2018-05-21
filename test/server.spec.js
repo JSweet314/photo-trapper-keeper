@@ -34,7 +34,7 @@ describe('API Routes', () => {
           expect(response).to.have.status(200);
           expect(response).to.be.json;
           expect(response.body).to.be.an('array');
-          expect(response.body.length).to.equal(3);
+          expect(response.body.length).to.equal(4);
           expect(response.body[0]).to.have.property(
             'id',
             1

@@ -6,13 +6,7 @@ const $urlInput = $('#url-input');
 const $submitPhotoBtn = $('#submit-photo-btn');
 const $formMessage = $('#form-message');
 
-$(document).ready(initApp);
-$titleInput.on('keyup', validateInput);
-$urlInput.on('keyup', validateInput);
-$submitPhotoBtn.on('click', submitPhoto);
-$photosContainer.on('click', '.delete-photo-btn', deletePhoto);
-
-function initApp() {
+const initApp = () => {
   api.fetchPhotos()
     .then(mapPhotosToHTML)
     .catch(error => {
@@ -22,7 +16,7 @@ function initApp() {
     })
 }
 
-function mapPhotosToHTML(photos) {
+const mapPhotosToHTML = photos => {
   const photoDivs = photos.reduce((html, photo) => {
     return html + `
           <div id="${photo.id}" class='photo'>
@@ -35,7 +29,7 @@ function mapPhotosToHTML(photos) {
   $photosContainer.html(photoDivs);
 }
 
-function validateInput() {
+const validateInput = () => {
   if ($titleInput.val() && $urlInput.val()) {
     $submitPhotoBtn.prop('disabled', false);
   } else {
@@ -44,7 +38,7 @@ function validateInput() {
   $formMessage.text('');
 }
 
-function submitPhoto(event) {
+const submitPhoto = event => {
   event.preventDefault();
   const photo = {
     title: $titleInput.val(),
@@ -62,11 +56,17 @@ function submitPhoto(event) {
     });
 }
 
-function deletePhoto() {
-  const id = parseInt($(this).parent().attr('id'));
+const deletePhoto = event => {
+  const id = parseInt($(event.target).parent().attr('id'));
   api.deletePhoto(id)
     .then(() => {
-      $(this).parent().remove();
+      $(event.target).parent().remove();
     })
     .catch($formMessage.text);
 }
+
+$(document).ready(initApp);
+$titleInput.on('keyup', validateInput);
+$urlInput.on('keyup', validateInput);
+$submitPhotoBtn.on('click', submitPhoto);
+$photosContainer.on('click', '.delete-photo-btn', deletePhoto);

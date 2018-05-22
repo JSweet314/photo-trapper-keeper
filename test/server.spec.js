@@ -56,9 +56,9 @@ describe('API Routes', () => {
     it('should add a new photo to the database', done => {
       chai.request(server)
         .post('/api/v1/photos')
-        .send({ 
-          title: 'The Grand Canyon', 
-          url: 'https://i.imgur.com/O9H5WlX.jpg' 
+        .send({
+          title: 'The Grand Canyon',
+          url: 'https://i.imgur.com/O9H5WlX.jpg'
         })
         .end((error, response) => {
           expect(response).to.have.status(201);
@@ -71,8 +71,8 @@ describe('API Routes', () => {
     it('should return an error with status 422 if a required param is missing', done => {
       chai.request(server)
         .post('/api/v1/photos')
-        .send({ 
-          title: 'A pretty picture' 
+        .send({
+          title: 'A pretty picture'
         })
         .end((error, response) => {
           expect(response).to.have.status(422);
@@ -101,11 +101,11 @@ describe('API Routes', () => {
         });
     });
 
-    it('should return an error with status 422 if no photo is found', done => {
+    it('should return an error with status 404 if no photo is found', done => {
       chai.request(server)
         .delete('/api/v1/photos/500')
         .end((error, response) => {
-          expect(response).to.have.status(422);
+          expect(response).to.have.status(404);
           expect(response).to.be.json;
           expect(response.body).to.have.property(
             'error',

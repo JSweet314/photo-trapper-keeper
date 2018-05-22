@@ -41,7 +41,7 @@ server.delete('/api/v1/photos/:id', (request, response) => {
     .del()
     .then(delCount => {
       if (delCount === 0) {
-        return response.status(422).json({
+        return response.status(404).json({
           error: `${delCount} photo(s) deleted. No photo found with id=${id}.`
         })
       }

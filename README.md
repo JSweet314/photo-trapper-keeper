@@ -31,3 +31,5 @@ npm start
 ```
 
 6. Visit the app in your browser at `localhost:3000`
+
+Tests can be run with `npm test`

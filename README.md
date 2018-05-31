@@ -1,4 +1,5 @@
 # Photo Trapper Keeper
+A Turing School assessment involving the creation of a postgreSQL database and the setup of an express server with a full testing suite.
 
 ## Instructions:
 1. Clone this repo
